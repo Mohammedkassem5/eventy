@@ -1,0 +1,51 @@
+.events-page {
+  padding: 32px 20px 60px;
+  min-height: 60vh;
+}
+
+.events-page__title {
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: 800;
+  margin: 0 0 20px;
+}
+
+.events-page__chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.chip {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  transition: all 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.chip--on {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.events-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  gap: clamp(16px, 3vw, 26px);
+}
+
+.events-page__empty {
+  text-align: center;
+  padding: 60px 0;
+  font-size: 15px;
+}

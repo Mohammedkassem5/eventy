@@ -1,0 +1,196 @@
+.auth {
+  min-height: calc(100vh - 66px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background:
+    radial-gradient(120% 60% at 85% 0%, rgba(247, 82, 0, 0.08) 0%, rgba(247, 82, 0, 0) 50%),
+    var(--color-bg);
+}
+
+.auth__card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: clamp(24px, 6vw, 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth__logo {
+  margin-bottom: 18px;
+}
+
+.auth__logo-inner {
+  --logo-icon: 44px;
+  --logo-text: 28px;
+}
+
+.auth__title {
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 800;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.auth__subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0 0 22px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* عناصر الفورم المشتركة */
+.auth__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth__label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.auth__input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  outline: none;
+  direction: rtl;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(247, 82, 0, 0.15);
+}
+
+/* حقل كلمة المرور مع زر إظهار/إخفاء */
+.auth__pw-wrap {
+  position: relative;
+}
+
+.auth__pw-wrap .auth__input {
+  padding-inline-start: 42px;
+}
+
+.auth__pw-toggle {
+  position: absolute;
+  inset-inline-start: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 18px;
+  line-height: 0;
+  padding: 6px;
+  cursor: pointer;
+}
+
+/* صف "تذكرني" + "نسيت كلمة المرور" */
+.auth__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.auth__remember {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.auth__remember input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}
+
+.auth__forgot {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.auth__footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.auth__footer a {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.auth__hint {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin: 4px 0 0;
+}
+
+.auth__link-btn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.auth__link-btn:disabled {
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
+/* حالات الخطأ لكل حقل */
+.auth__input--error {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+.auth__field-error {
+  display: flex; align-items: center; gap: 6px;
+  margin: 7px 2px 0; font-size: 12.5px; font-weight: 600;
+  color: #dc2626;
+  animation: fieldErrIn 0.2s ease;
+}
+.auth__field-error svg { flex-shrink: 0; font-size: 14px; }
+@keyframes fieldErrIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+
+/* صندوق خطأ بيانات الدخول */
+.auth__alert {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  color: #dc2626; font-size: 13px; font-weight: 700;
+  padding: 11px 14px; border-radius: 12px;
+  animation: fieldErrIn 0.2s ease;
+}
+.auth__alert svg { flex-shrink: 0; font-size: 16px; }

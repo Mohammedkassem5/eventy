@@ -1,0 +1,19 @@
+.bktimer {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(247, 82, 0, 0.1);
+  border: 1px solid rgba(247, 82, 0, 0.3);
+  color: var(--brand, #f75200);
+  font-size: 14px; font-weight: 700;
+  padding: 10px 16px; border-radius: 12px;
+  margin: 0 auto 16px; max-width: 420px;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+.bktimer svg { font-size: 18px; flex-shrink: 0; }
+.bktimer b { font-variant-numeric: tabular-nums; letter-spacing: 1px; }
+.bktimer--danger {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.4);
+  color: #dc2626;
+  animation: bkpulse 1s ease-in-out infinite;
+}
+@keyframes bkpulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.65; } }

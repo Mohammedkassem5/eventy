@@ -1,0 +1,23 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34em;
+  /* القيم الافتراضية — أي أب يقدر يعيد تعريفها */
+  --logo-icon: 40px;
+  --logo-text: 26px;
+}
+
+.logo__mark {
+  width: var(--logo-icon);
+  height: var(--logo-icon);
+  flex-shrink: 0;
+  border-radius: 24%;
+}
+
+.logo__text {
+  font-size: var(--logo-text);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #1f2430;
+  line-height: 1;
+}

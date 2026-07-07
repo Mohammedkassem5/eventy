@@ -1,0 +1,94 @@
+.rl__tabs { margin-bottom: 20px; }
+
+/* ===== Admins grid ===== */
+.rl__admins { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.adm-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 16px; display: flex; flex-direction: column; gap: 14px;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+.adm-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.adm-card__top { display: flex; align-items: center; gap: 12px; }
+.adm-card__top img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
+.adm-card__id { flex: 1; min-width: 0; }
+.adm-card__id h3 { margin: 0 0 4px; font-size: 16px; display: flex; align-items: center; gap: 6px; }
+.adm-card__id p { margin: 0; font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.adm-you { font-size: 10px; font-weight: 800; color: var(--orange); background: rgba(247,82,0,0.12); padding: 2px 7px; border-radius: 999px; }
+.badge-ban { background: #dc26261a; color: #dc2626; }
+.badge-demo { background: #f59e0b1a; color: #d97706; }
+.rl-demo { display: flex; align-items: flex-start; gap: 8px; margin: 4px 0 4px; font-size: 12.5px; color: var(--text-muted); cursor: pointer; }
+.rl-demo input { margin-top: 2px; width: 16px; height: 16px; accent-color: #f59e0b; flex-shrink: 0; }
+
+.adm-card__role { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 4px; }
+.role-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; background: var(--surface-2); padding: 6px 12px; border-radius: 999px; }
+.role-pill--owner { background: linear-gradient(135deg, #ff6a1a, #f75200); color: #fff; }
+.adm-card__perms { font-size: 12px; color: var(--text-muted); }
+.adm-card__cc { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; background: var(--surface-2); border-radius: var(--radius-md); }
+.cc-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: #0891b2; }
+.cc-rating { font-size: 13px; display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.cc-star { color: #f7b500; }
+.cc-rating b { font-size: 15px; }
+.cc-rating em { font-size: 11px; color: var(--text-muted); font-style: normal; }
+.adm-card__actions { display: flex; gap: 8px; border-top: 1px solid var(--border); padding-top: 12px; }
+.icon-btn--danger:hover { color: #dc2626; }
+
+/* ===== Roles grid ===== */
+.rl__roles { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.role-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 18px; display: flex; flex-direction: column; gap: 14px;
+}
+.role-card--owner { border-color: rgba(247,82,0,0.4); background: linear-gradient(180deg, rgba(247,82,0,0.05), transparent); }
+.role-card__head { display: flex; align-items: center; justify-content: space-between; }
+.role-card__head h3 { margin: 0; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+.role-card__count { font-size: 13px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 5px; }
+.badge-owner { font-size: 10px; font-weight: 800; background: var(--orange); color: #fff; padding: 2px 8px; border-radius: 999px; }
+.role-card__perms { display: flex; flex-wrap: wrap; gap: 6px; min-height: 28px; }
+.perm-tag { font-size: 11px; font-weight: 600; background: var(--surface-2); color: var(--text); padding: 4px 9px; border-radius: 7px; }
+.perm-tag--all { background: linear-gradient(135deg, #ff6a1a, #f75200); color: #fff; }
+.role-card__actions { display: flex; gap: 8px; border-top: 1px solid var(--border); padding-top: 12px; }
+.btn-danger-ghost:hover { color: #dc2626; border-color: #dc2626; }
+
+/* ===== Forms ===== */
+.rl-form .field { margin-bottom: 14px; }
+.rl-form label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+.rl-form input, .rl-form select {
+  width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text); font: inherit;
+}
+.rl-form input:disabled { opacity: 0.6; cursor: not-allowed; }
+.rl-form__hint { margin: 6px 0 0; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Permission editor ===== */
+.perm-editor { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; }
+.perm-editor__head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--surface-2); font-size: 13px; font-weight: 700; }
+.perm-group { border-top: 1px solid var(--border); }
+.perm-group__head {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 14px;
+  background: none; border: none; color: var(--text); font-size: 13px; font-weight: 800; cursor: pointer; text-align: start;
+}
+.perm-group__head:hover { background: var(--surface-2); }
+.perm-group__items { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px 14px 12px; }
+.perm-item {
+  display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: var(--radius-sm);
+  background: var(--surface-2); border: 1px solid transparent; color: var(--text);
+  font-size: 13px; cursor: pointer; text-align: start; transition: all 0.14s ease;
+}
+.perm-item:hover { border-color: var(--border); }
+.perm-item.on { background: rgba(247,82,0,0.1); border-color: rgba(247,82,0,0.4); }
+.perm-item span:nth-child(2) { flex: 1; font-weight: 600; }
+.perm-item code { font-size: 10px; color: var(--text-muted); font-family: ui-monospace, monospace; }
+.perm-check {
+  width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--border);
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 13px; font-weight: 900; color: #fff;
+}
+.perm-item.on .perm-check, .perm-group__head.on .perm-check { background: var(--orange); border-color: var(--orange); }
+.perm-group__head.some .perm-check { background: var(--orange); border-color: var(--orange); color: #fff; }
+
+.usr__actions { margin-top: 18px; display: flex; justify-content: flex-end; gap: 10px; }
+
+@media (max-width: 560px) {
+  .perm-group__items { grid-template-columns: 1fr; }
+  .perm-item code { display: none; }
+}

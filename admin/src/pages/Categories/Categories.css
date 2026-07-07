@@ -1,0 +1,23 @@
+/* page-unique — shared table/buttons in styles/admin.css */
+.count-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 26px; height: 24px; padding: 0 8px;
+  background: var(--orange); color: #fff; border-radius: 999px;
+  font-size: 13px; font-weight: 800; margin-inline-start: 8px; vertical-align: middle;
+}
+
+.toolbar { margin-bottom: 16px; }
+
+.cat-thumb { width: 46px; height: 36px; object-fit: cover; border-radius: 8px; }
+.cat-emoji { font-size: 26px; }
+.cat-en { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+
+.usage {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--surface-2); border-radius: 999px; padding: 4px 11px; font-size: 13px; font-weight: 700;
+}
+
+.drag-cell { width: 36px; text-align: center; }
+.drag-handle { color: var(--text-muted); cursor: grab; }
+.draggable-row:hover .drag-handle { color: var(--orange); }
+.draggable-row[draggable="true"]:active { cursor: grabbing; }

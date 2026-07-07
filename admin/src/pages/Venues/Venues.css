@@ -1,0 +1,8 @@
+/* page-unique only — shared in styles/admin.css */
+.vn-thumb { width: 54px; height: 38px; object-fit: cover; border-radius: 8px; }
+.vn-noimg { font-size: 24px; }
+.vn-en { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+.vn-cap { display: inline-flex; align-items: center; gap: 5px; }
+.vn-addr { font-size: 13px; color: var(--text-muted); max-width: 220px; }
+.vn-type { background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; }
+.vn-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }

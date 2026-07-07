@@ -1,0 +1,47 @@
+.fin__range { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+.fin__dates { display: flex; align-items: center; gap: 8px; }
+.fin__dates input { padding: 8px 11px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font: inherit; }
+.fin__dates span { color: var(--text-muted); }
+
+/* بطاقات */
+.fin__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-bottom: 22px; }
+.fin-card {
+  display: flex; gap: 14px; align-items: center; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px;
+  animation: finIn 0.4s ease both;
+}
+.fin-card--big { grid-column: span 2; background: linear-gradient(135deg, rgba(247,82,0,0.08), transparent); border-color: rgba(247,82,0,0.3); }
+.fin-card__icon { width: 48px; height: 48px; border-radius: 13px; display: inline-flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.fin-card__body { display: flex; flex-direction: column; min-width: 0; }
+.fin-card__label { font-size: 12px; color: var(--text-muted); }
+.fin-card__value { font-size: 22px; font-weight: 800; line-height: 1.2; }
+.fin-card--big .fin-card__value { font-size: 28px; }
+.fin-card__sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+@keyframes finIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* لوحات */
+.fin-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 18px; }
+.fin-panel h3 { margin: 0 0 16px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.fin-empty { text-align: center; padding: 30px 0; }
+.fin-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.fin-grid2 .fin-panel { margin-bottom: 0; }
+
+/* أشرطة التفصيل */
+.fin-bars { display: flex; flex-direction: column; gap: 14px; }
+.fin-bar__top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 5px; }
+.fin-bar__name { font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fin-bar__val { font-size: 13px; font-weight: 800; flex-shrink: 0; }
+.fin-bar__track { height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.fin-bar__track span { display: block; height: 100%; border-radius: 999px; transition: width 0.5s ease; }
+.fin-bar__meta { display: flex; gap: 12px; margin-top: 5px; font-size: 11px; color: var(--text-muted); }
+
+/* حالة الحجوزات */
+.fin-status { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+.fin-status__item { border: 1px solid var(--border); border-inline-start-width: 4px; border-radius: var(--radius-md); padding: 14px; text-align: center; }
+.fin-status__item span { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+.fin-status__item b { font-size: 24px; }
+
+@media (max-width: 820px) {
+  .fin-grid2 { grid-template-columns: 1fr; }
+  .fin-card--big { grid-column: span 1; }
+}

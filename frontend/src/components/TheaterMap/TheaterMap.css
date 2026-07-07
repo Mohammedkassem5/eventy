@@ -1,0 +1,172 @@
+/* ===== مخطط المسرح المسطّح (overview) — يطابق التصميم المرجعي ===== */
+.thmap {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px clamp(8px, 2.5vw, 30px) 26px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+[data-theme="dark"] .thmap { background: #12151b; }
+
+.thmap__stage {
+  background: linear-gradient(180deg, #eceef2, #dcdfe6);
+  color: #3a3f4a;
+  font-weight: 800;
+  font-size: clamp(18px, 3vw, 30px);
+  letter-spacing: 3px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  width: min(42%, 300px);
+  margin: 0 auto 12px;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.05);
+}
+[data-theme="dark"] .thmap__stage { background: linear-gradient(180deg, #2a2e37, #22262e); color: #cdd2dc; }
+
+/* شريط أمامي */
+.thmap__front {
+  width: min(60%, 640px);
+  margin: 0 auto 10px;
+  background: color-mix(in srgb, var(--tier) 88%, #000);
+  border-radius: 9px;
+  padding: 7px 12px;
+}
+.thmap__front .thseg__dots { position: static; opacity: 0.6; }
+
+.thmap__bands { display: flex; flex-direction: column; gap: 10px; }
+
+/* الطبقة = جانب · وسط · جانب */
+.thband {
+  position: relative;
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: stretch;
+  min-height: 84px;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+.thband:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.04); }
+.thband.is-active .thseg { outline: 3px solid #fff; outline-offset: -3px; }
+.thband.is-locked { filter: grayscale(0.75) brightness(0.9); opacity: 0.5; cursor: not-allowed; }
+.thband.is-out { filter: grayscale(0.9) brightness(0.8); opacity: 0.55; cursor: not-allowed; }
+
+/* segment (side/center) */
+.thseg {
+  position: relative;
+  background: color-mix(in srgb, var(--tier) 85%, #000);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.thseg--side { min-width: 60px; }
+.thseg--center { flex: 1; }
+
+.thseg__dots {
+  display: grid;
+  gap: 3px;
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  opacity: 0.6;
+}
+.thseg__dots i {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 5px;
+  justify-self: center;
+}
+
+/* بطاقة السعر العائمة وسط القطاع المركزي */
+.thband__pill {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  font-size: clamp(13px, 2.2vw, 17px);
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+}
+.thband__ic { font-size: 18px; line-height: 1; }
+.thband__pill b { font-weight: 800; }
+.thband__pill em { font-style: normal; opacity: 0.92; font-size: 0.85em; }
+.thband__out { background: rgba(0, 0, 0, 0.35); padding: 2px 8px; border-radius: 999px; font-size: 11px; }
+
+/* شريط سفلي مقسّم */
+.thmap__back {
+  width: min(58%, 620px);
+  margin: 10px auto 0;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+.thmap__back-blk {
+  background: color-mix(in srgb, var(--tier) 80%, #000);
+  border-radius: 8px;
+  padding: 7px 8px;
+  flex: 1;
+}
+.thmap__back-blk .thseg__dots { opacity: 0.55; }
+
+/* ===== المصغّر الحيّ (مقاعد فعلية) ===== */
+.thmini {
+  background: #12151b;
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.thmini__stage {
+  background: linear-gradient(180deg, #2f9e57, #176b35);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  padding: 8px;
+  border-radius: 999px;
+}
+.thmini__grid {
+  display: grid;
+  gap: 3px;
+  padding: 4px;
+}
+.thmini__seat {
+  aspect-ratio: 1;
+  min-width: 8px;
+  border: none;
+  border-radius: 3px;
+  padding: 0;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--tier) 55%, #fff 25%);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.thmini__seat.is-available:hover { transform: scale(1.25); box-shadow: 0 0 0 2px #fff; }
+.thmini__seat.is-booked { background: #3a3f4a; cursor: not-allowed; }
+.thmini__seat.is-held { background: #f7a24d; cursor: not-allowed; }
+.thmini__seat.is-sel {
+  background: #22c55e;
+  box-shadow: 0 0 0 2px #fff, 0 0 10px 2px rgba(34, 197, 94, 0.9);
+  transform: scale(1.2);
+  z-index: 2;
+  animation: thmini-pop 0.25s ease;
+}
+@keyframes thmini-pop { from { transform: scale(0.6); } to { transform: scale(1.2); } }
+
+@media (max-width: 640px) {
+  .thband__pill em { display: block; }
+}

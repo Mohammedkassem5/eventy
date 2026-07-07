@@ -1,0 +1,73 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* خلفية فاتحة + توهّج برتقالي خفيف أعلى اليمين (زي الديزاين) */
+  background:
+    radial-gradient(120% 80% at 85% 8%, rgba(247, 82, 0, 0.10) 0%, rgba(247, 82, 0, 0) 45%),
+    radial-gradient(100% 60% at 15% 95%, rgba(247, 82, 0, 0.05) 0%, rgba(247, 82, 0, 0) 50%),
+    #fdfbfa;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+.splash--hide { opacity: 0; pointer-events: none; }
+
+/* ---------- الشعار في المنتصف ---------- */
+.splash__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* الحجم متجاوب بالكامل من 320 إلى 1024 */
+.splash__logo {
+  --logo-icon: clamp(46px, 11vw, 72px);
+  --logo-text: clamp(28px, 8vw, 46px);
+  gap: clamp(10px, 2.5vw, 18px);
+}
+
+/* ---------- سبينر النقاط ---------- */
+.splash__loader-wrap {
+  position: absolute;
+  bottom: clamp(56px, 14vh, 120px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.splash__loader {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  animation: splash-spin 1s steps(12) infinite;
+}
+
+.splash__loader span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  border-radius: 50%;
+  background: var(--orange, #f75200);
+  transform-origin: center 22px; /* الدوران حول مركز الحلقة */
+  transform: rotate(calc(var(--i) * 30deg));
+  /* تدرّج الشفافية يعطي إحساس الـ comet/spinner */
+  opacity: calc(0.12 + var(--i) * 0.08);
+}
+
+@keyframes splash-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash__loader {
+    animation-duration: 2s;
+  }
+}

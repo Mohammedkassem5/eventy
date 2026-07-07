@@ -1,0 +1,87 @@
+.wallet {
+  padding: 30px 20px 60px;
+  min-height: 60vh;
+}
+
+.wallet__title {
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: 800;
+  margin: 0 0 22px;
+}
+
+.wallet__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+}
+
+.wcard {
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.wcard--points { background: linear-gradient(135deg, #ff7a33, #f75200); }
+.wcard--cash { background: linear-gradient(135deg, #1f2937, #0d0d12); }
+
+.wcard__ic {
+  position: absolute;
+  inset-inline-start: 16px;
+  top: 16px;
+  font-size: 30px;
+  opacity: 0.35;
+}
+.wcard__label { font-size: 14px; opacity: 0.9; }
+.wcard__big { font-size: 34px; font-weight: 800; line-height: 1.1; }
+.wcard__sub { font-size: 13px; opacity: 0.85; }
+
+.wallet__note {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #b45309;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 18px 0 0;
+}
+
+.wallet__sec {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 30px 0 14px;
+}
+
+.wmoves { display: flex; flex-direction: column; gap: 10px; }
+.wmove {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+.wmove__ic {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+.wmove__ic--in { background: #dcfce7; color: #16a34a; }
+.wmove__ic--out { background: #fee2e2; color: #dc2626; }
+.wmove__info { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.wmove__label { font-weight: 700; font-size: 14px; }
+.wmove__date { font-size: 12px; }
+.wmove__pts { font-weight: 800; font-size: 15px; }
+.wmove__pts--in { color: #16a34a; }
+.wmove__pts--out { color: #dc2626; }
+
+.wallet__empty {
+  text-align: center; padding: 50px 0;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}

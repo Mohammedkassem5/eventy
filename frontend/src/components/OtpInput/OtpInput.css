@@ -1,0 +1,24 @@
+.otp {
+  display: flex;
+  gap: clamp(6px, 2.5vw, 12px);
+  justify-content: center;
+}
+
+.otp__box {
+  width: clamp(40px, 13vw, 54px);
+  height: clamp(48px, 15vw, 60px);
+  text-align: center;
+  font-size: clamp(20px, 6vw, 26px);
+  font-weight: 700;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.otp__box:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(247, 82, 0, 0.15);
+}

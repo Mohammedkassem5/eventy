@@ -1,0 +1,44 @@
+.shs {
+  position: relative; width: 100%;
+  min-height: clamp(400px, 58vh, 680px);
+  border-radius: 18px; background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  padding: 16px;
+}
+.shs__bg { position: absolute; inset: 16px; border-radius: 12px; background: var(--color-bg, #f7f8fa); }
+[data-theme="dark"] .shs { background: #12151b; }
+[data-theme="dark"] .shs__bg { background: #0e1118; }
+.shs__svg { position: absolute; inset: 16px; width: calc(100% - 32px); height: calc(100% - 32px); pointer-events: none; }
+.shs__svg polygon { stroke: var(--color-border, #d1d5db) !important; }
+
+/* ── مقعد مربّع (نمط مرجعي) — كبير وواضح ── */
+.shs__seat {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: clamp(34px, 4.4vw, 52px);
+  height: clamp(34px, 4.4vw, 52px);
+  border-radius: 10px 10px 8px 8px;
+  border: 2px solid #cfd6e4;
+  background: #ffffff;
+  color: #2b3242;
+  font-size: clamp(12px, 1.5vw, 16px); font-weight: 800;
+  cursor: pointer; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35), inset 0 -3px 0 rgba(0, 0, 0, 0.06);
+  transition: transform 0.13s ease, box-shadow 0.13s ease, background 0.13s ease, border-color 0.13s ease;
+}
+.shs__seat span { line-height: 1; }
+
+/* متاح */
+.shs__seat.is-available:hover { transform: translate(-50%, -50%) scale(1.14) translateY(-2px); border-color: #22c55e; box-shadow: 0 8px 16px rgba(34, 197, 94, 0.45); z-index: 5; }
+/* محجوز */
+.shs__seat.is-booked { background: #d6dae2; border-color: #c3c8d2; color: #9aa0ac; cursor: not-allowed; box-shadow: none; }
+/* محجوز مؤقتًا */
+.shs__seat.is-held { background: #fff4e6; border-color: #f7a24d; color: #d97706; cursor: not-allowed; }
+/* اختيارك */
+.shs__seat.is-sel {
+  background: #22c55e; border-color: #16a34a; color: #fff;
+  transform: translate(-50%, -50%) scale(1.12) translateY(-2px);
+  box-shadow: 0 8px 18px rgba(34, 197, 94, 0.6);
+  z-index: 6;
+}

@@ -1,0 +1,14 @@
+.st__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+.st-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; }
+.st-card__label { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+.st-card__label > svg { font-size: 18px; color: var(--orange); margin-top: 2px; flex-shrink: 0; }
+.st-card__label b { display: block; font-size: 14px; }
+.st-card__label code { font-size: 11px; color: var(--text-muted); font-family: ui-monospace, monospace; }
+.st-card__edit { display: flex; gap: 8px; align-items: center; }
+.st-card__edit input { flex: 1; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font: inherit; }
+.st-card__edit input:focus { border-color: var(--orange); outline: none; }
+
+.st-form .field { margin-bottom: 14px; }
+.st-form label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+.st-form input { width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font: inherit; box-sizing: border-box; }
+.st-form__actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }

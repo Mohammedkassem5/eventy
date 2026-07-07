@@ -1,0 +1,194 @@
+/* ═══════════════════════════════════════════════════
+   StadiumMap — مخطط الملعب ثلاثي الأبعاد
+   ═══════════════════════════════════════════════════ */
+
+/* ─── Base ─────────────────────────────────────────── */
+.stadium {
+  width: 100%;
+  perspective: 1300px;
+  perspective-origin: 50% 38%;
+  padding: clamp(10px, 3vw, 30px) 0;
+}
+
+.stadium__tilt {
+  transform: rotateX(46deg);
+  transform-origin: center 58%;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.stadium__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* ─── Generic sectors ──────────────────────────────── */
+.stadium__sec {
+  cursor: pointer;
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 1;
+  /* حواف نظيفة على المنحنيات وتحت منظور rotateX */
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: filter 0.18s ease, opacity 0.18s ease, stroke 0.18s ease, stroke-width 0.18s ease;
+}
+
+.stadium__sec:hover {
+  filter: brightness(1.15) saturate(1.1);
+}
+
+/* الفئة المختارة — حدود بيضاء نظيفة موحّدة + توهّج خفيف واحد */
+.stadium__sec.is-active {
+  stroke: #ffffff;
+  stroke-width: 2;
+  filter: brightness(1.14) saturate(1.15) drop-shadow(0 0 4px rgba(255, 255, 255, 0.45));
+  animation: sec-pulse 2s ease-in-out infinite;
+}
+
+@keyframes sec-pulse {
+  0%, 100% { stroke-opacity: 0.85; filter: brightness(1.12) saturate(1.12) drop-shadow(0 0 3px rgba(255,255,255,0.35)); }
+  50%      { stroke-opacity: 1;    filter: brightness(1.2) saturate(1.2) drop-shadow(0 0 7px rgba(255,255,255,0.6)); }
+}
+
+/* الفئات المقفلة */
+.stadium__sec.is-locked {
+  opacity: 0.22;
+  filter: grayscale(0.7);
+  pointer-events: none;
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+/* ─── Section zones (أقسام الفئة النشطة) ─────────── */
+.stadium__sec--zone {
+  cursor: pointer;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: filter 0.2s ease, stroke-width 0.2s ease, stroke 0.2s ease;
+}
+
+.stadium__sec--zone.is-active {
+  animation: none;
+  filter: brightness(1.08) saturate(1.1);
+  stroke-width: 1.4;
+}
+
+.stadium__secgrp {
+  cursor: pointer;
+}
+
+.stadium__secgrp:hover .stadium__sec--zone {
+  filter: brightness(1.22) saturate(1.15);
+  stroke-width: 2;
+}
+
+.stadium__sec--zone.is-active-section {
+  stroke: #ffffff;
+  stroke-width: 2.4;
+  filter: brightness(1.28) saturate(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.55));
+  animation: section-glow 2s ease-in-out infinite;
+}
+
+@keyframes section-glow {
+  0%, 100% { stroke-opacity: 0.9; filter: brightness(1.24) saturate(1.15) drop-shadow(0 0 4px rgba(255,255,255,0.45)); }
+  50%      { stroke-opacity: 1;   filter: brightness(1.38) saturate(1.25) drop-shadow(0 0 9px rgba(255,255,255,0.75)); }
+}
+
+/* ─── Section labels inside SVG ────────────────────── */
+.stadium__secnum {
+  fill: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  paint-order: stroke;
+  stroke: rgba(0, 0, 0, 0.65);
+  stroke-width: 3.5px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.stadium__secseats {
+  fill: rgba(255, 255, 255, 0.88);
+  font-size: 9.5px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: rgba(0, 0, 0, 0.5);
+  stroke-width: 2.5px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ─── Category labels ──────────────────────────────── */
+.stadium__label {
+  fill: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  paint-order: stroke;
+  stroke: rgba(0, 0, 0, 0.55);
+  stroke-width: 3px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.stadium__label.is-dim {
+  opacity: 0.3;
+}
+
+/* ─── Pitch label ──────────────────────────────────── */
+.stadium__pitch-label {
+  fill: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  font-weight: 700;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ─── Mini‑map mode ────────────────────────────────── */
+.stadium--mini {
+  perspective: 800px;
+  padding: 0;
+}
+
+.stadium--mini .stadium__tilt {
+  transform: rotateX(34deg);
+}
+
+.stadium--mini .stadium__sec {
+  cursor: pointer;
+}
+
+.stadium__dot {
+  fill: #fff;
+  fill-opacity: 0.92;
+  stroke: none;
+  animation: dot-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    fill-opacity: 0.9;
+    r: 6;
+  }
+  50% {
+    fill-opacity: 1;
+    r: 10;
+  }
+}
+
+/* ─── Responsive ───────────────────────────────────── */
+@media (max-width: 560px) {
+  .stadium__tilt {
+    transform: rotateX(32deg);
+  }
+
+  .stadium__secnum {
+    font-size: 11px;
+  }
+
+  .stadium__secseats {
+    font-size: 8px;
+  }
+}

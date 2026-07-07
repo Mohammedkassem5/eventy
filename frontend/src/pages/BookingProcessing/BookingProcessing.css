@@ -1,0 +1,12 @@
+.bkproc { display: flex; justify-content: center; padding: 60px 16px; }
+.bkproc__box {
+  text-align: center; background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: 18px; padding: 40px 32px; max-width: 420px; width: 100%;
+}
+.bkproc__box > svg { font-size: 56px; margin-bottom: 14px; }
+.bkproc__box h2 { margin: 0 0 8px; }
+.bkproc__box--ok > svg { color: #16a34a; }
+.bkproc__box--fail > svg { color: #dc2626; }
+.bkproc__box .btn { margin-top: 18px; }
+.bkproc__spin { color: var(--color-primary); animation: bkspin 1s linear infinite; }
+@keyframes bkspin { to { transform: rotate(360deg); } }

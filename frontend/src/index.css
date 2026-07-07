@@ -1,0 +1,213 @@
+/* ============================================================
+   Eventy — Global Design Tokens
+   Layer 1: raw palette (matches the design swatches exactly)
+   Layer 2: semantic tokens (what components actually use)
+   ============================================================ */
+
+:root {
+  /* ---------- Primary ---------- */
+  --orange: #f75200;
+
+  /* ---------- Secondary ---------- */
+  --yellow: #f5b83d;
+  --blue: #4285f4;
+  --green: #2ebd6b;
+  --dark-orange: #a03100;
+  --white: #ffffff;
+  --grey: #efefef;
+  --grey-2: #e1e1e1;
+  --soft-darkish: #3d3d3d;
+
+  /* ---------- Text ---------- */
+  --text-black: #0d0d0d;
+  --text-white: #ffffff;
+
+  /* ---------- State ---------- */
+  --info: #4285f4;
+  --success: #2e9e4f;
+  --warning: #e5b72e;
+  --error: #e25c5c;
+
+  /* ---------- Background ---------- */
+  --bg-page: #ffffff;
+
+  /* ---------- Gradients ---------- */
+  --gradient-orange: linear-gradient(135deg, #f75200 0%, #ff7a33 100%);
+  --gradient-black: linear-gradient(135deg, #1f2025 0%, #0d0d0d 100%);
+  --gradient-button: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  --gradient-divider: linear-gradient(90deg, #e1e1e1 0%, #ffffff 100%);
+
+  /* ============================================================
+     Semantic tokens — use THESE in components
+     ============================================================ */
+  --color-primary: var(--orange);
+  --color-primary-contrast: var(--white);
+
+  --color-bg: var(--bg-page);
+  --color-surface: var(--white);
+  --color-surface-alt: var(--grey);
+
+  --color-text: var(--text-black);
+  --color-text-muted: var(--soft-darkish);
+  --color-text-inverse: var(--text-white);
+
+  --color-border: var(--grey-2);
+  --color-divider: var(--grey-2);
+
+  --color-info: var(--info);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* ---------- Shadows ---------- */
+  --shadow-card: 0 2px 10px rgba(13, 13, 13, 0.06);
+  --shadow-card-hover: 0 8px 24px rgba(13, 13, 13, 0.12);
+
+  /* ---------- Typography ---------- */
+  --font-base: "Segoe UI", Tahoma, "Cairo", system-ui, sans-serif;
+}
+
+/* ============================================================
+   Base reset
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background: var(--color-bg);
+  color: var(--color-text);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main {
+  flex: 1;
+}
+
+/* ============================================================
+   Shared helpers
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 11px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.08s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.btn svg { font-size: 18px; }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+.btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(247, 82, 0, 0.28); }
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  box-shadow: 0 3px 10px rgba(247, 82, 0, 0.25);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 5px 16px rgba(247, 82, 0, 0.34);
+}
+
+.btn-danger { background: var(--color-error); color: #fff; }
+.btn-danger:hover { filter: brightness(1.06); }
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+
+.btn-dark {
+  background: var(--gradient-button);
+  color: var(--text-white);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ---------- Badges ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* شريط الوضع التجريبي */
+.demo-banner {
+  background: repeating-linear-gradient(45deg, #f59e0b, #f59e0b 12px, #fbbf24 12px, #fbbf24 24px);
+  color: #1f2937; font-weight: 800; font-size: 13px; text-align: center; padding: 8px 14px;
+  position: sticky; top: 0; z-index: 200;
+}

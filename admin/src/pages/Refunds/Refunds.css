@@ -1,0 +1,9 @@
+.rf-reason { font-size: 13px; color: var(--text-muted); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.rfd__amount { font-size: 22px; color: var(--orange); }
+.rfd__reason { background: var(--surface-2); border-radius: var(--radius-md); padding: 12px 14px; margin: 14px 0; }
+.rfd__reason p { margin: 4px 0 0; font-size: 14px; }
+.rfd__actions { display: flex; gap: 10px; margin-top: 16px; }
+.rfd__actions .btn { flex: 1; }
+.rfd__done { margin-top: 14px; font-size: 13px; }
+.rfd__done p { margin: 4px 0; }
