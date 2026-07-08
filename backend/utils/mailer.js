@@ -1,9 +1,13 @@
 import nodemailer from "nodemailer";
 import logger from "./logger.js";
 
-// لو فيه بيانات SMTP في .env → ننشئ transporter حقيقي، غير كده null (dev)
+// مزوّد الإيميل: Resend (HTTPS — يعمل على Railway) أو SMTP (Gmail... محجوب على Railway) أو dev.
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const MAIL_FROM = process.env.MAIL_FROM || "Eventy <onboarding@resend.dev>";
+
+// SMTP احتياطي (للتشغيل المحلي)
 let transporter = null;
-if (process.env.MAIL_USER && process.env.MAIL_PASS) {
+if (!RESEND_API_KEY && process.env.MAIL_USER && process.env.MAIL_PASS) {
   transporter = nodemailer.createTransport({
     host: process.env.MAIL_HOST,
     port: Number(process.env.MAIL_PORT || 587),
@@ -12,7 +16,35 @@ if (process.env.MAIL_USER && process.env.MAIL_PASS) {
   });
 }
 
-export const mailerReady = !!transporter;
+export const mailerReady = !!RESEND_API_KEY || !!transporter;
+
+// إرسال موحّد: يفضّل Resend عبر HTTPS، وإلا SMTP. يرجّع true لو اتبعت فعلًا.
+async function deliver({ to, subject, html, attachments }) {
+  if (RESEND_API_KEY) {
+    const body = { from: MAIL_FROM, to: [to], subject, html };
+    if (attachments?.length) {
+      body.attachments = attachments.map((a) => ({
+        filename: a.filename,
+        content: Buffer.isBuffer(a.content) ? a.content.toString("base64") : a.content,
+      }));
+    }
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      throw new Error(`Resend ${res.status}: ${detail}`);
+    }
+    return true;
+  }
+  if (transporter) {
+    await transporter.sendMail({ from: MAIL_FROM, to, subject, html, attachments });
+    return true;
+  }
+  return false;
+}
 
 // يرسل كود OTP. يرجّع true لو اتبعت فعلًا بالإيميل، false لو dev fallback (console)
 export async function sendOtpEmail(to, code, purpose = "verify") {
@@ -29,18 +61,12 @@ export async function sendOtpEmail(to, code, purpose = "verify") {
       <p>صالح لمدة 10 دقائق. لا تشاركه مع أحد.</p>
     </div>`;
 
-  if (!transporter) {
+  if (!mailerReady) {
     logger.info(`[DEV OTP] ${purpose} → ${to} : ${code}`);
     return false;
   }
 
-  await transporter.sendMail({
-    from: process.env.MAIL_FROM || "Eventy <no-reply@eventy.com>",
-    to,
-    subject,
-    html,
-  });
-  return true;
+  return deliver({ to, subject, html });
 }
 
 // إيميل تأكيد الحجز + QR
@@ -86,16 +112,14 @@ export async function sendBookingEmail(to, booking) {
       ${deliveryBlock}
     </div>`;
 
-  if (!transporter) {
+  if (!mailerReady) {
     logger.info(`[DEV BOOKING] ${to} : ${booking.booking_ref}`);
     return false;
   }
-  await transporter.sendMail({
-    from: process.env.MAIL_FROM || "Eventy <no-reply@eventy.com>",
+  return deliver({
     to,
     subject: `تذكرتك في Eventy — ${booking.booking_ref}`,
     html,
     attachments,
   });
-  return true;
 }

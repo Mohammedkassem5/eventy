@@ -6,7 +6,12 @@ import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import jwt from "jsonwebtoken";
+import dns from "node:dns";
 import "dotenv/config";
+
+// شبكة Railway تفضّل IPv6 لكنها لا تصل لبعض الخوادم الخارجية (مثل smtp.gmail.com) عبره.
+// نجبر Node على تفضيل IPv4 حتى لا يعلّق إرسال الإيميل بخطأ ENETUNREACH.
+dns.setDefaultResultOrder("ipv4first");
 
 import { setIO, userRoom, ADMIN_ROOM, emitTyping, emitRead, emitPresence, adminsOnline } from "./utils/socket.js";
 import SupportMessage from "./models/support/SupportMessage.js";
