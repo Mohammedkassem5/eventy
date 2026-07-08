@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import SplashScreen from "./components/SplashScreen/SplashScreen";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -64,6 +65,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       {!splashGone && <SplashScreen hiding={!loading} />}
 
       {user?.is_demo && (

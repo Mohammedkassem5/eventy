@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./store/authStore";
 import { meApi } from "./services/meApi";
 import AdminLayout from "./components/AdminLayout/AdminLayout";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import ComingSoon from "./pages/ComingSoon/ComingSoon";
 import { firstAllowedPath } from "./components/AdminLayout/nav";
 import { setDemo } from "./lib/demo";
@@ -59,6 +60,7 @@ export default function App() {
 
   return (
     <Suspense fallback={null}>
+    <ScrollToTop />
     <Routes>
       <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
       <Route path="/forgot-password" element={<GuestOnly><ForgotPassword /></GuestOnly>} />
