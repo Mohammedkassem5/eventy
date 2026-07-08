@@ -8,6 +8,7 @@ const redis = new Redis({
   host: process.env.REDIS_HOST || "127.0.0.1",
   port: Number(process.env.REDIS_PORT || 6379),
   password: process.env.REDIS_PASSWORD || undefined,
+  family: 0, // يسمح بـ IPv4 و IPv6 معًا — مطلوب لشبكة Railway الداخلية (IPv6)
   maxRetriesPerRequest: null, // مطلوب لتوافق Bull
   lazyConnect: true, // يتصل عند أول استخدام فعلي (لحد ما نشغّل Docker Redis)
 });
