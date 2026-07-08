@@ -1,13 +1,21 @@
 import nodemailer from "nodemailer";
 import logger from "./logger.js";
 
-// مزوّد الإيميل: Resend (HTTPS — يعمل على Railway) أو SMTP (Gmail... محجوب على Railway) أو dev.
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const MAIL_FROM = process.env.MAIL_FROM || "Eventy <onboarding@resend.dev>";
+// مزوّد الإيميل: Brevo (HTTPS — يعمل على Railway ويرسل لأي حد) أو SMTP (محلي) أو dev.
+const BREVO_API_KEY = process.env.BREVO_API_KEY;
+const MAIL_FROM = process.env.MAIL_FROM || "Eventy <no-reply@eventy.com>";
+
+// يفصل "Eventy <you@gmail.com>" إلى { name, email }
+function parseFrom(str) {
+  const m = str.match(/^\s*(.*?)\s*<([^>]+)>\s*$/);
+  if (m) return { name: m[1] || "Eventy", email: m[2].trim() };
+  return { name: "Eventy", email: str.trim() };
+}
+const sender = parseFrom(MAIL_FROM);
 
 // SMTP احتياطي (للتشغيل المحلي)
 let transporter = null;
-if (!RESEND_API_KEY && process.env.MAIL_USER && process.env.MAIL_PASS) {
+if (!BREVO_API_KEY && process.env.MAIL_USER && process.env.MAIL_PASS) {
   transporter = nodemailer.createTransport({
     host: process.env.MAIL_HOST,
     port: Number(process.env.MAIL_PORT || 587),
@@ -16,26 +24,26 @@ if (!RESEND_API_KEY && process.env.MAIL_USER && process.env.MAIL_PASS) {
   });
 }
 
-export const mailerReady = !!RESEND_API_KEY || !!transporter;
+export const mailerReady = !!BREVO_API_KEY || !!transporter;
 
-// إرسال موحّد: يفضّل Resend عبر HTTPS، وإلا SMTP. يرجّع true لو اتبعت فعلًا.
+// إرسال موحّد: يفضّل Brevo عبر HTTPS، وإلا SMTP. يرجّع true لو اتبعت فعلًا.
 async function deliver({ to, subject, html, attachments }) {
-  if (RESEND_API_KEY) {
-    const body = { from: MAIL_FROM, to: [to], subject, html };
+  if (BREVO_API_KEY) {
+    const body = { sender, to: [{ email: to }], subject, htmlContent: html };
     if (attachments?.length) {
-      body.attachments = attachments.map((a) => ({
-        filename: a.filename,
+      body.attachment = attachments.map((a) => ({
+        name: a.filename,
         content: Buffer.isBuffer(a.content) ? a.content.toString("base64") : a.content,
       }));
     }
-    const res = await fetch("https://api.resend.com/emails", {
+    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
-      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+      headers: { "api-key": BREVO_API_KEY, "Content-Type": "application/json", accept: "application/json" },
       body: JSON.stringify(body),
     });
     if (!res.ok) {
       const detail = await res.text().catch(() => "");
-      throw new Error(`Resend ${res.status}: ${detail}`);
+      throw new Error(`Brevo ${res.status}: ${detail}`);
     }
     return true;
   }
