@@ -11,14 +11,20 @@ export function signAccessToken(payload) {
 }
 
 export function setAuthCookie(res, token, name = CUSTOMER_COOKIE) {
+  const isProd = process.env.NODE_ENV === "production";
   res.cookie(name, token, {
     httpOnly: true,
-    secure: process.env.COOKIE_SECURE === "true",
-    sameSite: "lax",
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 أيام
   });
 }
 
 export function clearAuthCookie(res, name = CUSTOMER_COOKIE) {
-  res.clearCookie(name);
+  const isProd = process.env.NODE_ENV === "production";
+  res.clearCookie(name, {
+    httpOnly: true,
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
+  });
 }
