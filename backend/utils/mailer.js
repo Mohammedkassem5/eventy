@@ -41,10 +41,12 @@ async function deliver({ to, subject, html, attachments }) {
       headers: { "api-key": BREVO_API_KEY, "Content-Type": "application/json", accept: "application/json" },
       body: JSON.stringify(body),
     });
+    const resText = await res.text().catch(() => "");
     if (!res.ok) {
-      const detail = await res.text().catch(() => "");
-      throw new Error(`Brevo ${res.status}: ${detail}`);
+      logger.error(`Brevo error ${res.status}: ${resText}`);
+      throw new Error(`Brevo ${res.status}: ${resText}`);
     }
+    logger.info(`Brevo sent to ${to} — ${res.status} ${resText}`);
     return true;
   }
   if (transporter) {
