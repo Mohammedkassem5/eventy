@@ -132,12 +132,8 @@ app.use(sanitizeBody);
 app.use("/uploads", express.static("uploads"));
 
 /* ---------- Health check ---------- */
-app.get("/api/health", async (_req, res) => {
-  const { mailerReady } = await import("./utils/mailer.js");
-  res.json({
-    status: "ok", service: "eventy-backend", time: new Date(),
-    mailer: { ready: mailerReady, from: process.env.MAIL_FROM || "(not set)", brevoKey: !!process.env.BREVO_API_KEY },
-  });
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok", service: "eventy-backend", time: new Date() });
 });
 
 /* =========================
