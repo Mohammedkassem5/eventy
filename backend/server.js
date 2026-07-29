@@ -136,18 +136,6 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", service: "eventy-backend", time: new Date() });
 });
 
-/* ---------- Temporary email test (remove after debugging) ---------- */
-app.get("/api/test-email", async (_req, res) => {
-  try {
-    const { sendOtpEmail, mailerReady } = await import("./utils/mailer.js");
-    if (!mailerReady) return res.json({ error: "mailer not ready" });
-    const result = await sendOtpEmail("mkassem0899@gmail.com", "999888", "verify");
-    res.json({ sent: result, mailerReady });
-  } catch (err) {
-    res.status(500).json({ error: err.message, stack: err.stack?.split("\n").slice(0, 3) });
-  }
-});
-
 /* =========================
    Routes
 ========================= */
