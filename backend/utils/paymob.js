@@ -34,7 +34,7 @@ export async function createOrder(token, amountCents, merchantOrderId) {
 
 // 3) مفتاح الدفع (payment key) لتكامل الكارت
 export async function paymentKey(token, amountCents, orderId, billing) {
-  const redirectUrl = `${process.env.FRONTEND_URL}/booking/processing`;
+  const redirectUrl = `${process.env.CLIENT_URL || process.env.FRONTEND_URL}/booking/processing`;
   const d = await post("/acceptance/payment_keys", {
     auth_token: token,
     amount_cents: amountCents,
