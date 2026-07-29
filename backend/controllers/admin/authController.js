@@ -59,10 +59,10 @@ export async function forgotPassword(req, res) {
   const admin = await Admin.findOne({ where: { email } });
   if (admin) {
     const code = await generateOtp("reset", email);
-    await sendOtpEmail(email, code, "reset");
-    return res.json({ message: "إن وُجد الحساب فقد أرسلنا كودًا", ...devOtpField(code) });
+    const sent = await sendOtpEmail(email, code, "reset");
+    return res.json({ message: "إن وُجد الحساب فقد أرسلنا كودًا", _debug: { found: true, sent }, ...devOtpField(code) });
   }
-  res.json({ message: "إن وُجد الحساب فقد أرسلنا كودًا" });
+  res.json({ message: "إن وُجد الحساب فقد أرسلنا كودًا", _debug: { found: false } });
 }
 
 /* ===== POST /api/admin/auth/password/reset ===== */
