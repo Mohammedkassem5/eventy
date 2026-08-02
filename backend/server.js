@@ -136,6 +136,18 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", service: "eventy-backend", time: new Date() });
 });
 
+/* temp debug — remove after test */
+app.get("/api/test-email-2", async (req, res) => {
+  try {
+    const { sendOtpEmail, mailerReady } = await import("./utils/mailer.js");
+    const to = req.query.to || "mkassem0899@gmail.com";
+    const sent = await sendOtpEmail(to, "777666", "reset");
+    res.json({ sent, to, mailerReady });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /* =========================
    Routes
 ========================= */
